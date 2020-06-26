@@ -7,7 +7,6 @@ import psycopg2
 import pandas as pd
 
 
-
 # ENV_PATH = os.path.join(os.getcwd(), '.env')
 # > loads contents of the .env file into the script's environment
 # load_dotenv(ENV_PATH)
@@ -94,6 +93,7 @@ def fetch_strains(query):
     connection.close()
     return pairs
 
+
 def fetch_top(query):
     # Creating connection object inside function to sustain connection
     # until session end
@@ -121,6 +121,7 @@ def fetch_top(query):
     connection.close()
     return pairs
 
+
 def fetch_data(query):
       # Creating connection object inside function to sustain connection
     # until session end
@@ -137,12 +138,12 @@ def fetch_data(query):
     strains = list(cursor.fetchall())
     # Key-value pair names for df columns
     columns = ["strain", "id",
-                "flavors",
-                "effects",
-                "medical",
-                "type",
-                "rating",
-                "flavor"]
+               "flavors",
+               "effects",
+               "medical",
+               "type",
+               "rating",
+               "flavor"]
     # List of tuples to DF
     df = pd.DataFrame(strains, columns=columns)
     # DF to dictionary
@@ -150,6 +151,7 @@ def fetch_data(query):
     # Closing Connection
     connection.close()
     return pairs
+
 
 @home_routes.route("/")
 def index():
@@ -169,6 +171,7 @@ def strains():
 def recommendations():
     return "This will list recommendations."
 
+
 @home_routes.route("/data")
 def data():
     query = """
@@ -176,6 +179,7 @@ def data():
     FROM medcab
     """
     return fetch_data(query)
+
 
 @home_routes.route("/toptenrating")
 def toprating():

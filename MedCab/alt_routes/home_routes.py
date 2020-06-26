@@ -17,7 +17,9 @@ print(DB_NAME, DB_USER, DB_PASSWORD, DB_HOST)
 
 home_routes = Blueprint("home_routes", __name__)
 
+
 def fetch_strains(query):
+
 '''
 Creating connection object inside function to sustain connection until session end
 '''
@@ -40,14 +42,16 @@ Creating connection object inside function to sustain connection until session e
     df = pd.DataFrame(strains, columns=columns)
     print(type(df))
 
-    '''DF to dictionary''' 
+    '''DF to dictionary'''
     pairs = df.to_json(orient='records')
     print(type(pairs))
     '''Closing Connection'''
     connection.close()
     return pairs
 
+
 def fetch_top(query):
+
 '''
 Creating connection object inside function to sustain connection until session end
 '''

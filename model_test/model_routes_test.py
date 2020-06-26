@@ -135,6 +135,8 @@ def run_model():
 """ Add dynamic route for model_routes"""
 
 """Tweak hello_pickle function for use with input variable"""
+
+
 def hello_recommender(nn, x):
     """
     Function to use pickled model to get nearest neighbor recommendation
@@ -171,6 +173,7 @@ def hello_recommender(nn, x):
     # Possibly grab top 5, loop them and grab their info
     return summary
 
+
 @model_routes.route("/model/<symptoms_string>")
 def make_rec(symptoms_string=None):
     x = symptoms_string
@@ -179,6 +182,7 @@ def make_rec(symptoms_string=None):
     result = hello_recommender(recommender, x)
     res = result[0].to_json()
     return res
+
 
 # Closing Connection
 connection.close()

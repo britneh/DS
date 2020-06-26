@@ -59,7 +59,7 @@ pairs = df.to_json(orient='records')
 
 ###################### FUNCTIONS ######################################
 
-### Function to load model
+# Function to load model
 def load_model():
     """Function to load pickled nearest neighbors model"""
     # print("LOADING THE MODEL...")
@@ -67,7 +67,9 @@ def load_model():
         saved_model = pickle.load(model_file)
     return saved_model
 
-### Function to generate recommendation
+# Function to generate recommendation
+
+
 def hello_pickle(nn):
     """
     Function to use pickled model to get nearest neighbor recommendation
@@ -107,7 +109,9 @@ def hello_pickle(nn):
     # Possibly grab top 5, loop them and grab their info
     return summary
 
-### Function to generate recommendation from user input
+# Function to generate recommendation from user input
+
+
 def hello_recommender(nn, x):
     """
     Function to use pickled model to get nearest neighbor recommendation
@@ -153,7 +157,7 @@ def hello_recommender(nn, x):
 @model_routes.route("/model")
 def run_model():
     """
-    Route function to use pickled model and generate strain 
+    Route function to use pickled model and generate strain
     recommendation.
     """
     recommender = load_model()
@@ -162,10 +166,11 @@ def run_model():
     res = result[0].to_json()
     return res
 
+
 @model_routes.route("/model/<symptoms_string>")
 def make_rec(symptoms_string=None):
     """
-    Route function to use pickled model and generate strain 
+    Route function to use pickled model and generate strain
     recommendation from dynamic input.
 
     Params:
@@ -179,6 +184,7 @@ def make_rec(symptoms_string=None):
     result = hello_recommender(recommender, x)
     res = result[0].to_json()
     return res
+
 
 # Closing Connection
 connection.close()
